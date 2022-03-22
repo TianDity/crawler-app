@@ -1,19 +1,34 @@
 const router = require('koa-router')()
+const crawlerController = require('../controllers/crawler')
+const cp = require('child_process')
+const { resolve } = require('path')
+
+router, prefix('/crawler')
 
 router.get('/', async (ctx, next) => {
-  await ctx.render('index', {
-    title: 'Hello Koa 2!'
+  const script = resolve(__dirname, '../puppeteer/crawler.js');
+  const child = cp.fork(script, []);
+
+  let invoked = false;
+
+  child.on('message', (msg) => {
+    console.log(msg)
   })
-})
 
-router.get('/string', async (ctx, next) => {
-  ctx.body = 'koa2 string'
-})
+  child.on('exit', (code) => {
+    if (invoked) return;
 
-router.get('/json', async (ctx, next) => {
-  ctx.body = {
-    title: 'koa2 json'
-  }
+    invoked = true;
+    console.log(data);
+  })
+
+  child.on('error', (err) => {
+    if (invoked) return;
+
+    invoked = true;
+    console.log(err);
+  })
+
 })
 
 module.exports = router
