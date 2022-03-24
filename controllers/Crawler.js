@@ -2,6 +2,7 @@ const { startProcess, qiniuUpload } = require('../libs/utils')
 const config = require('../config/config')
 const { addSliderData } = require('../services/Slider')
 const { addAgencyInfo } = require('../services/AgencyInfo')
+const { addRecomCourse } = require('../services/RecomCourse')
 
 class Crawler {
     crawSliderData() {
@@ -123,6 +124,14 @@ class Crawler {
                             if (teacherImgData.key) {
                                 item.teacherImgKey = teacherImgData.key;
                             }
+                        }
+
+                        const result = await addRecomCourse(item);
+
+                        if (result) {
+                            console.log('Date create OK')
+                        } else {
+                            console.log('Date create ERROR')
                         }
 
 

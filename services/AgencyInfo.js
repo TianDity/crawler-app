@@ -5,7 +5,7 @@ class AgencyInfoService {
     async addAgencyInfo(data) {
         return await prisma.agency_info.upsert({
             where: {
-                id: 1
+                cid: data.cid
             },
             update: {
                 ...data
