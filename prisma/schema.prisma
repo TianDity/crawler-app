@@ -1,11 +1,52 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model Slider {
+  id        Int      @id @default(autoincrement())
+  cid       String   @unique
+  title     String
+  imgUrl    String
+  link      String
+  imgKey    String
+  status    Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Agency_info {
+  id           Int      @id @default(autoincrement())
+  logoUrl      String
+  name         String
+  feedbackRate Int
+  studentCount Int
+  description  String
+  qqLink       String
+  logoKey      String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Recom_course {
+  id            Int      @id @default(autoincrement())
+  cid           String   @unique
+  href          String
+  mainTitle     String
+  title         String
+  posterUrl     String
+  description   String
+  teacherImg    String
+  teacherName   String
+  studentCount  Int
+  price         Int
+  posterKey     String
+  teacherImgKey String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }

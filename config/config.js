@@ -10,5 +10,12 @@ module.exports = {
                 domain: 'http://r96dom9io.hn-bkt.clouddn.com/',
             }
         }
+    },
+    crawler: {
+        url: {
+            main: 'https://msiwei.ke.qq.com/#category=-1&tab=0',
+            course: 'https://msiwei.ke.qq.com/#tab=1&category=-1',
+            teacher: 'https://msiwei.ke.qq.com/#tab=2&category=-1'
+        }
     }
 }

@@ -1,7 +1,7 @@
 module.exports = {
     mysql: {
         base: {
-            host: 'localhost_3306',
+            host: 'localhost',
             dialect: 'mysql',
             pool: {
                 max: 5,
