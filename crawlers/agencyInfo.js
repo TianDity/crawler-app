@@ -8,6 +8,7 @@ Crawler({
         const $section = $('.agency-head');
 
         return {
+            cid: 1,
             logoUrl: $section.find('.agency-head-logo').prop('src'),
             name: $section.find('.ag-title-main').text(),
             feedbackRate: +($section.find('.ag-info span').eq(0).text().replace(/[^0-9]/ig, '')),

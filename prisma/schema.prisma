@@ -22,6 +22,7 @@ model Slider {
 
 model Agency_info {
   id           Int      @id @default(autoincrement())
+  cid          Int      @unique
   logoUrl      String
   name         String
   feedbackRate Int
@@ -47,6 +48,87 @@ model Recom_course {
   price         Int
   posterKey     String
   teacherImgKey String
+  status        Int      @default(1)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+}
+
+model Course_collection {
+  id           Int      @id @default(autoincrement())
+  cid          Int      @unique
+  title        String
+  courseInfo   String
+  addGroupLink String
+  bdImgUrl     String
+  bdImgKey     String
+  courseList   String
+  status       Int      @default(1)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Teacher_list {
+  id            Int      @id @default(autoincrement())
+  cid           String   @unique
+  teacherName   String
+  courseCount   Int
+  studentCount  Int
+  teacherIntro  String
+  teacherHref   String
+  teacherImg    String
+  teacherImgKey String
+  isStar        Int      @default(0)
+  status        Int      @default(1)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Student_list {
+  id            Int      @id @default(autoincrement())
+  cid           Int      @unique
+  studentName   String
+  studentIntro  String
+  studentImg    String
+  studentImgKey String
+  learnCourse   String
+  courseLink    String
+  status        Int      @default(1)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Course_type {
+  id          Int           @id @default(autoincrement())
+  cid         String        @unique
+  title       String
+  status      Int           @default(1)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  course_list Course_list[]
+}
+
+model Course_list {
+  id           Int         @id @default(autoincrement())
+  cid          String      @unique
+  title        String
+  href         String
+  price        String
+  buyCount     Int
+  courseImg    String
+  courseImgKey String
+  courseType   Course_type @relation(fields: [typeID], references: [id])
+  typeID       Int
+  status       Int         @default(1)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+model About_us {
+  id          Int      @id @default(autoincrement())
+  title       String
+  content     String
+  aboutImg    String
+  aboutImgKey String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

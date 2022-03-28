@@ -6,7 +6,7 @@ const { qiniu } = require('../config/config')
 
 module.exports = {
     startProcess(options) {
-        const script = resolve(__dirname, options.path);
+        const script = resolve(__dirname, '../crawlers/' + options.path);
         const child = cp.fork(script, []);
 
         let invoked = false;

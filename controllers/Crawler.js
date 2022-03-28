@@ -5,9 +5,9 @@ const { addAgencyInfo } = require('../services/AgencyInfo')
 const { addRecomCourse } = require('../services/RecomCourse')
 
 class Crawler {
-    crawSliderData() {
+    crawlSliderData() {
         startProcess({
-            path: '../crawlers/slider',
+            path: 'slider',
             async message(data) {
                 data.map(async item => {
                     if (item.imgUrl && !item.imgKey) {
@@ -51,9 +51,9 @@ class Crawler {
     }
 
 
-    crawAgencyInfo() {
+    crawlAgencyInfo() {
         startProcess({
-            path: '../crawlers/agencyInfo',
+            path: 'agencyInfo',
             async message(data) {
                 if (data.logoUrl && !data.logoKey) {
                     const qiniu = config.qiniu;
@@ -93,9 +93,9 @@ class Crawler {
     }
 
 
-    crawRecomCourse() {
+    crawlRecomCourse() {
         startProcess({
-            path: '../crawlers/recomCourse',
+            path: 'recomCourse',
             async message(data) {
                 console.log(data);
                 data.map(async item => {
@@ -140,6 +140,37 @@ class Crawler {
                     }
 
                 })
+            },
+            async exit(code) {
+                console.log(code);
+            },
+            async error(error) {
+                console.log(error);
+            }
+        })
+    }
+
+    crawlTeacherList() {
+        startProcess({
+            path: 'teacherList',
+            async message(data) {
+                console.log(data);
+            },
+            async exit(code) {
+                console.log(code);
+            },
+            async error(error) {
+                console.log(error);
+            }
+        })
+    }
+
+
+    crawlStudentList() {
+        startProcess({
+            path: 'studentList',
+            async message(data) {
+                console.log(data);
             },
             async exit(code) {
                 console.log(code);
