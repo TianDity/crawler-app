@@ -5,23 +5,24 @@ Crawler({
     url: crawler.url.teacher,
     callback() {
         const $ = window.$;
-        const $list = $('.js-teacher-list .tea');
-        console.log('2222');
+        const $item = $('.tea');
 
         const data = [];
 
-        $list.each((index, item) => {
+        $item.each((index, item) => {
             const $el = $(item);
+
             const dataItem = {
-                cid: $el.attr('report-tdw').match(/[0-9]{10}/ig)[0],
-                teacherName: $el.find('.tea-main-title').text(),
-                courseCount: $el.find('.tea-main-sub span').eq(0).text().split(' ')[1],
-                studentCount: $el.find('.tea-main-sub span').eq(1).text().split(' ')[1],
+                cid: index + 1,
+                teacherName: $el.find('.tea-face').prop('title'),
+                courseCount: parseInt($el.find('.tea-main-sub span').eq(0).text().replace(/[^0-9]/ig, '')),
+                studentCount: parseInt($el.find('.tea-main-sub span').eq(1).text().replace(/[^0-9]/ig, '')),
                 teacherIntro: $el.find('.tea-main-cnt').text().trim(),
                 teacherHref: $el.find('.tea-face').prop('href'),
-                teacherImg: $el.find('.tea-face img').prop('src'),
+                teacherImg: 'http:' + $el.find('.tea-img').attr('lazy-src'),
                 teacherImgKey: '',
             }
+
             data.push(dataItem);
         })
 

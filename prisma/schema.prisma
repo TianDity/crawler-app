@@ -69,7 +69,7 @@ model Course_collection {
 
 model Teacher_list {
   id            Int      @id @default(autoincrement())
-  cid           String   @unique
+  cid           Int      @unique
   teacherName   String
   courseCount   Int
   studentCount  Int
@@ -99,7 +99,7 @@ model Student_list {
 
 model Course_type {
   id          Int           @id @default(autoincrement())
-  cid         String        @unique
+  cid         Int           @unique
   title       String
   status      Int           @default(1)
   createdAt   DateTime      @default(now())
@@ -116,7 +116,7 @@ model Course_list {
   buyCount     Int
   courseImg    String
   courseImgKey String
-  courseType   Course_type @relation(fields: [typeID], references: [id])
+  courseType   Course_type @relation(fields: [typeID], references: [cid])
   typeID       Int
   status       Int         @default(1)
   createdAt    DateTime    @default(now())
@@ -125,10 +125,19 @@ model Course_list {
 
 model About_us {
   id          Int      @id @default(autoincrement())
+  cid         Int      @unique
   title       String
   content     String
   aboutImg    String
   aboutImgKey String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Admin {
+  id          Int      @id @default(autoincrement())
+  username        String   @unique
+  password    String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

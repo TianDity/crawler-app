@@ -5,23 +5,32 @@ Crawler({
     url: crawler.url.main,
     callback() {
         const $ = window.$;
-        const $list = $('.js-teacher-list li');
-
-        console.log('111');
+        const $list = $('.agency-stu-list li');
 
         const data = [];
+
+        // id            Int      @id @default(autoincrement())
+        // cid           Int      @unique
+        // studentName   String
+        // studentIntro  String
+        // studentImg    String
+        // studentImgKey String
+        // learnCourse   String
+        // courseLink    String
+        // status        Int      @default(1)
+        // createdAt     DateTime @default(now())
+        // updatedAt     DateTime @updatedAt
 
         $list.each((index, item) => {
             const $el = $(item);
             const dataItem = {
-                cid: $el.attr('report-tdw').match(/[0-9]{10}/ig)[0],
-                teacherName: $el.find('.tea-main-title').text(),
-                courseCount: $el.find('.tea-main-sub span').eq(0).text().split(' ')[1],
-                studentCount: $el.find('.tea-main-sub span').eq(1).text().split(' ')[1],
-                teacherIntro: $el.find('.tea-main-cnt').text().trim(),
-                teacherHref: $el.find('.tea-face').prop('href'),
-                teacherImg: $el.find('.tea-face img').prop('src'),
-                teacherImgKey: '',
+                cid: index + 1,
+                studentName: $el.find('.stu-main h4').text(),
+                studentIntro: $el.find('.stu-main-cnt').text().trim(),
+                studentImg: $el.find('.stu-img').prop('src'),
+                studentImgKey: '',
+                learnCourse: $el.find('.stu-main-tit').prop('title'),
+                courseLink: $el.find('.stu-main-tit').prop('href'),
             }
             data.push(dataItem);
         })
